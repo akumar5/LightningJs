@@ -1,0 +1,6 @@
+[submodule "blits"]
+	path = blits
+	url = ssh://git@github.com/blits.git
+[submodule "components"]
+	path = components
+	url = ssh://git@github.com/components.git
