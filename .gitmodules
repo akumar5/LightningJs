@@ -4,3 +4,6 @@
 [submodule "components"]
 	path = components
 	url = ssh://git@github.com/components.git
+[submodule "focus"]
+	path = focus
+	url = ssh://git@github.com/focus.git
