@@ -7,3 +7,12 @@
 [submodule "focus"]
 	path = focus
 	url = ssh://git@github.com/focus.git
+[submodule "layout"]
+	path = layout
+	url = ssh://git@github.com/layout.git
+[submodule "i-plate"]
+	path = i-plate
+	url = ssh://git@github.com/i-plate.git
+[submodule "images"]
+	path = images
+	url = ssh://git@github.com/images.git
