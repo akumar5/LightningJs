@@ -4,3 +4,18 @@
 [submodule "components"]
 	path = components
 	url = ssh://git@github.com/components.git
+[submodule "focus"]
+	path = focus
+	url = ssh://git@github.com/focus.git
+[submodule "layout"]
+	path = layout
+	url = ssh://git@github.com/layout.git
+[submodule "i-plate"]
+	path = i-plate
+	url = ssh://git@github.com/i-plate.git
+[submodule "images"]
+	path = images
+	url = ssh://git@github.com/images.git
+[submodule "themes"]
+	path = themes
+	url = ssh://git@github.com/themes.git
