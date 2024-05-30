@@ -16,3 +16,6 @@
 [submodule "images"]
 	path = images
 	url = ssh://git@github.com/images.git
+[submodule "themes"]
+	path = themes
+	url = ssh://git@github.com/themes.git
