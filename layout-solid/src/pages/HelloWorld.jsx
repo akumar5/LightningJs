@@ -1,12 +1,12 @@
 import { Text, View } from "@lightningjs/solid";
-import { createSignal, For } from "solid-js";
+import { createSignal, For, createResource, Match, Switch } from "solid-js";
 import { Column } from "@lightningjs/solid-ui";
 
 import { useParams } from "@solidjs/router";
 
 import { default as ItemRow } from "../components/Row/ItemRow";
 
-let rowData = [
+/*  let rowData = [
   {
     y: 0,
     data: [
@@ -37,32 +37,77 @@ let rowData = [
       { title: "C5", description: "C5 description", color: 0xff00ffff },
     ],
   },
-];
+ ]; 
+ */
+
+const fetchMovies = async () => {
+  const url =
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZDc2YmI4MjhlYzM3ZTQzZTgyOGE3NWI0ZWQ4YTBkNyIsInN1YiI6IjVlNGZhZDE2OWI4NjE2MDAxODZjNmY1MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xlaXnemAXqIlF6dnxmbiMBK8A9DbSFbfcCNH3BV3nWY",
+    },
+  };
+
+  let movies = await fetch(url, options);
+  
+  movies = movies.json;
+  let data = [{y:0, data: [] }, { y:280 ,data: [] }, { y:560, data: [] }];
+
+  let counter = 0;
+  for (let i = 0; i < 15; ++i) {
+    if (i % 5 == 0 && i != 0) {
+      counter++;
+    }
+    
+    let result = movies.results[i];
+    data[counter].data.push({
+      title: result.original_title,
+      backdrop: "https://image.tmdb.org/t/p/original" + result.backdrop_path,
+      image: "https://image.tmdb.org/t/p/w500" + result.poster_path,
+    });
+  }
+  return data;
+};
 
 function HelloWorld() {
+  // const [rows, setRows] = createSignal([...rowData]);
   const [title, setTitle] = createSignal("");
+
+  const [backdrop, setBackdrop] = createSignal("");
+  setBackdrop(
+    "https://image.tmdb.org/t/p/original/z121dSTR7PY9KxKuvwiIFSYW8cf.jpg"
+  );
+  const [rowData] = createResource(fetchMovies);
+
   const params = useParams();
 
-  console.log(params.show);
-  console.log(params.episode);
+  // console.log(params.show);
+  // console.log(params.episode);
 
-  return (
-    <>
-      <Text x={190}>{title()}</Text>
-      <Column autofocus y={720} x={190}>
-        <For each={rowData}>
-          {(row, i) => (
-            <ItemRow
-              rowIndex={i}
-              row={row}
-              numRows={rowData.length}
-              setTitle={setTitle}
-              key={i} />
-          )}
-        </For>
-      </Column>
-    </>
-  );
-}
+  return
+    <View width={1920} height={1080} src={backdrop()}>
+      <Text x={190} fontSize={80}>{title()}</Text>
+      <Switch>
+        <Match when={rowData()}>
+          <Column autofocus y={720} x={190}>
+            <For each={rowData}>
+              {(row, i) => 
+                <ItemRow
+                  rowIndex={i}
+                  row={row}
+                  numRows={rowData().length}
+                  setTitle={setTitle}
+                  setBackDrop={setBackDrop}
+                  key={i} />
+                  }</For>
+          </Column>
+        </Match>
+      </Switch>
+    </View>
+};
 
 export default HelloWorld;
