@@ -15,15 +15,16 @@ const item = {
 };
 
 export default function Item(props) {
-  return
-    <View
-      style={item}
-      src={props.data.image}
-      onEnter={() => console.log("Hello")}
-      onFocus={() => {
-        props.setTitle(props.data.title);
-        props.setBackdrop(props.data.backdrop);
-      }}>
-      <Text>{props.rowIndex}</Text>
-    </View>
+  return;
+  <View
+    style={item}
+    src={props.data.image}
+    onEnter={() => console.log("Hello")}
+    onFocus={() => {
+      props.setTitle(props.data.title);
+      props.setBackdrop(props.data.backdrop);
+    }}
+  >
+    <Text>{props.rowIndex}</Text>
+  </View>;
 }
