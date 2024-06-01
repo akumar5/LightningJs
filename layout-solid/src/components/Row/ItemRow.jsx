@@ -26,7 +26,7 @@ return <Row height={500} alpha={alpha()}
     onDown={down}>
        <For each={props.row.data}>{(data, i) => 
      <Item color={data.color} key={i} rowIndex={props.rowIndex} 
-     setTitle={props.setTitle} data={data}/>     
+     setTitle={props.setTitle} setBackdrop={props.setBackdrop} data={data}/>     
     }
     </For>
 </Row>
